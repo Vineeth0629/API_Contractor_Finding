@@ -20,6 +20,6 @@ public partial class TbCustomer
     public int? CustomerId { get; set; }
 
     public virtual TbBuilding? BuildingTypeNavigation { get; set; }
-
     public virtual TbUser? Customer { get; set; }
+
 }

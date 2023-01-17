@@ -21,14 +21,14 @@ namespace API.Controllers
     [ApiController]
     public class UserController : BaseController
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
         private readonly IUserService userService;
         private readonly IGenerateToken generateToken;
         private const string Sessionkey = "UserId";
         private readonly IMapper _mapper;
 
         //constructor
-        public UserController(ContractorFindingContext contractordemoContext, IUserService userService, IMapper mapper, IGenerateToken generateToken):base(contractordemoContext)
+        public UserController(NewContractorFindingContext contractordemoContext, IUserService userService, IMapper mapper, IGenerateToken generateToken):base(contractordemoContext)
         {
             this.userService = userService;
             this.generateToken = generateToken;

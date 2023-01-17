@@ -14,12 +14,12 @@ namespace API.Controllers
     [ApiController]
     public class ContractorController : BaseController
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
         private readonly IContractorService contractorService;
         private const string Sessionkey = "UserId";
 
         //Constructor
-        public ContractorController(ContractorFindingContext contractorFindingContext, IContractorService contractorService):base(contractorFindingContext)
+        public ContractorController(NewContractorFindingContext contractorFindingContext, IContractorService contractorService):base(contractorFindingContext)
         {
             this.contractorService = contractorService;
         }
@@ -31,7 +31,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="contractorDetail"></param>
         /// <returns></returns>
-        [HttpPut]      
+        [HttpPost]      
         public IActionResult CreateContractor(ContractorDetail contractorDetail)
         {
             try
@@ -77,7 +77,7 @@ namespace API.Controllers
         /// </summary>
         /// <param name="contractorDetail"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
         [Route("ContractorUpdate")]
         public async Task<IActionResult>Post(ContractorDetail contractorDetail)
         {
@@ -104,11 +104,11 @@ namespace API.Controllers
         /// <param name="contractorDetail"></param>
         /// <returns></returns>
         [HttpDelete]
-        public IActionResult DeleteContractor(ContractorDetail contractorDetail)
+        public IActionResult DeleteContractor(string licenseId)
         {
             try
             {
-                var contractor = contractorService.DeleteContractor(contractorDetail);
+                var contractor = contractorService.DeleteContractor(licenseId);
                 if (contractor == true)
                 {
                     return Ok(new CrudStatus() { Status = true, Message = "Deleted successful!" });

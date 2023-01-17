@@ -17,11 +17,11 @@ namespace Service
 {
     public class GenerateToken : IGenerateToken
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
         private readonly IConfiguration _config;
 
         //Constructor
-        public GenerateToken(ContractorFindingContext dbContext, IConfiguration configuration)
+        public GenerateToken(NewContractorFindingContext dbContext, IConfiguration configuration)
         {
             contractorFindingContext = dbContext;
             _config = configuration;

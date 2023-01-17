@@ -13,7 +13,7 @@ namespace Service.Interface
         public bool CreateContractor(ContractorDetail contractorDetail);
         List<ContractorDisplay> GetContractorDetails(Pagination pageParams);
         Task<ContractorDetail> updateContractorDetails(ContractorDetail contractorDetail);
-        public bool DeleteContractor(ContractorDetail contractorDetail);
+        public bool DeleteContractor(string contractorDetail);
         List<ContractorDisplay> GetContractorDetailsByPinCode(int pinCode, Pagination pageParams);
 
     }

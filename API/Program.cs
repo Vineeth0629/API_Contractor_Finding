@@ -20,7 +20,7 @@ builder.Services.AddControllersWithViews().AddNewtonsoftJson
     (options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore).AddNewtonsoftJson
     (options => options.SerializerSettings.ContractResolver = new DefaultContractResolver());
 var connectionString = builder.Configuration.GetConnectionString("dbcon");
-builder.Services.AddDbContext<ContractorFindingContext>(option =>
+builder.Services.AddDbContext<NewContractorFindingContext>(option =>
 option.UseSqlServer(connectionString)
 );
 builder.Services.AddScoped<IUserService, UserService>();

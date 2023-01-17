@@ -18,12 +18,12 @@ namespace Service
 {
     public class UserService : IUserService
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
         private readonly IEncrypt encrypt;    
         private readonly IGenerateToken generateToken;
 
         //Constractor
-        public UserService(ContractorFindingContext contractorFindingContext, IEncrypt encrypt, IGenerateToken generateToken)
+        public UserService(NewContractorFindingContext contractorFindingContext, IEncrypt encrypt, IGenerateToken generateToken)
         {
             this.contractorFindingContext = contractorFindingContext;
             this.encrypt = encrypt;

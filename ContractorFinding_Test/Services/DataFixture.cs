@@ -13,14 +13,14 @@ namespace ContractorFinding_Test.Services
 {
     public class DataFixture : IDisposable
     {
-        private static DbContextOptions<ContractorFindingContext> dbContextOptions = new DbContextOptionsBuilder<ContractorFindingContext>()
-         .UseInMemoryDatabase(databaseName: "Contractor_Finding")
+        private static DbContextOptions<NewContractorFindingContext> dbContextOptions = new DbContextOptionsBuilder<NewContractorFindingContext>()
+         .UseInMemoryDatabase(databaseName: "NewContractorFindingContext")
          .Options;
-        public ContractorFindingContext context;
+        public NewContractorFindingContext context;
 
         public DataFixture()
         {
-            context = new ContractorFindingContext(dbContextOptions);
+            context = new NewContractorFindingContext(dbContextOptions);
             context.Database.EnsureCreated();
             SeedDatabase();
         }

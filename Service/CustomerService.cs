@@ -14,12 +14,12 @@ namespace Service
 {
     public class CustomerService : ICustomerService
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
         private readonly SendMessage sms;
         private readonly ContractorService _contractorservice;
 
         //Constructor
-        public CustomerService(ContractorFindingContext contractorFindingContext)
+        public CustomerService(NewContractorFindingContext contractorFindingContext)
         {
             this.contractorFindingContext = contractorFindingContext;
             this.sms = new SendMessage();
@@ -112,9 +112,9 @@ namespace Service
         }
 
         //DELETE
-        public bool DeleteCustomer(TbCustomer tbCustomer)
+        public bool DeleteCustomer(string RegistrationNo)
         {
-            TbCustomer customer = contractorFindingContext.TbCustomers.Where(c => c.RegistrationNo == tbCustomer.RegistrationNo).FirstOrDefault()!;
+            TbCustomer customer = contractorFindingContext.TbCustomers.Where(c => c.RegistrationNo == RegistrationNo).FirstOrDefault()!;
             if (customer != null)
             {
                 contractorFindingContext.TbCustomers.Remove(customer);

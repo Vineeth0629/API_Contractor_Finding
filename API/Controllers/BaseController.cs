@@ -9,10 +9,10 @@ namespace API.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
         private const string Sessionkey = "userId";
 
-        public BaseController(ContractorFindingContext contractorFindingContext)
+        public BaseController(NewContractorFindingContext contractorFindingContext)
         {
             this.contractorFindingContext = contractorFindingContext;
         }

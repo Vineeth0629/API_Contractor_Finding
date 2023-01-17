@@ -16,10 +16,10 @@ namespace Service
 {
     public class ContractorService : IContractorService
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
 
         //Constructor
-        public ContractorService(ContractorFindingContext contractorFindingContext)
+        public ContractorService(NewContractorFindingContext contractorFindingContext)
         {
             this.contractorFindingContext = contractorFindingContext;
         }
@@ -212,10 +212,10 @@ namespace Service
         }
 
         //DELETE
-        public bool DeleteContractor(ContractorDetail contractorDetail)
+        public bool DeleteContractor(string License)
         {
 
-            ContractorDetail contractor = contractorFindingContext.ContractorDetails.Where(x => x.License == contractorDetail.License).FirstOrDefault()!;
+            ContractorDetail contractor = contractorFindingContext.ContractorDetails.Where(x => x.License == License).FirstOrDefault()!;
             if (contractor != null)
             {
                 contractorFindingContext.ContractorDetails.Remove(contractor);

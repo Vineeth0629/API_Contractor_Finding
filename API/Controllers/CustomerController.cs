@@ -15,11 +15,11 @@ namespace API.Controllers
     [ApiController]
     public class CustomerController : BaseController
     {
-        private readonly ContractorFindingContext contractorFindingContext;
+        private readonly NewContractorFindingContext contractorFindingContext;
         private readonly ICustomerService customerService;
         private const string Sessionkey = "UserId";
         //Constructor 
-        public CustomerController(ContractorFindingContext contractorFindingContext, ICustomerService customerService):base(contractorFindingContext)
+        public CustomerController(NewContractorFindingContext contractorFindingContext, ICustomerService customerService):base(contractorFindingContext)
         {
             this.customerService = customerService;
         }
@@ -30,7 +30,8 @@ namespace API.Controllers
         /// </summary>
         /// <param name="tbCustomer"></param>
         /// <returns></returns>
-        [HttpPut]
+        [HttpPost]
+
         public IActionResult CreateContractor(TbCustomer tbCustomer)
         {
             try
@@ -74,7 +75,8 @@ namespace API.Controllers
         /// </summary>
         /// <param name="tbCustomer"></param>
         /// <returns></returns>
-        [HttpPost]
+        [HttpPut]
+
         [Route("CustomerUpdate")]
         public async Task<IActionResult> Post(TbCustomer tbCustomer)
         {
@@ -100,11 +102,11 @@ namespace API.Controllers
         /// <param name="tbCustomer"></param>
         /// <returns></returns>
         [HttpDelete]
-        public IActionResult DeleteCustomer(TbCustomer tbCustomer)
+        public IActionResult DeleteCustomer(string registrationNo)
         {
             try
             {
-                var customer = customerService.DeleteCustomer(tbCustomer);
+                var customer = customerService.DeleteCustomer(registrationNo);
                 if (customer == true)
                 {
                     return Ok(new CrudStatus() { Status = true, Message = "Deleted successfully!" });
