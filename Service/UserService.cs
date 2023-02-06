@@ -184,5 +184,20 @@ namespace Service
             List<Userview> users = contractorFindingContext.Userviews.ToList();
             return users;
         }
+        //particular details
+        public TbUser Getuser(int? id)
+        {
+            TbUser list = (from user in contractorFindingContext.TbUsers
+                           where (user.UserId == id)
+                           select new TbUser
+                           {
+                               UserId = user.UserId,
+                               FirstName = user.FirstName,
+                               LastName = user.LastName,
+                               PhoneNumber = user.PhoneNumber,
+                               EmailId = user.EmailId,
+                           }).FirstOrDefault()!;
+            return list;
+        }
     }
 }

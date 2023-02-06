@@ -231,5 +231,20 @@ namespace API.Controllers
                 return BadRequest(ex.Message);
             }
         }
+        
+        [HttpGet]
+        [Route("particular details")]
+        //[Authorize]
+        public JsonResult GetUser(int? id)
+        {
+            try
+            {
+                return new JsonResult(userService.Getuser(id));
+            }
+            catch (Exception ex)
+            {
+                return new JsonResult(ex.Message);
+            }
+        }
     }
 }
