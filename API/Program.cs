@@ -9,6 +9,7 @@ using Repository;
 using Service;
 using Service.Interface;
 using Swashbuckle.AspNetCore.Filters;
+using System.Reflection;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -47,16 +48,44 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJw
         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
     };
 });
-builder.Services.AddSwaggerGen(options =>
+builder.Services.AddSwaggerGen(c =>
 {
-    options.AddSecurityDefinition("ouath2", new OpenApiSecurityScheme
+c.SwaggerDoc("v1", new OpenApiInfo  { Title = "dotnetclaimAuthorization",Version = "v1"});
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
     {
-        Description = "Standard Authorization header using the bearer schema(\"bearer {token}\")",
         In = ParameterLocation.Header,
-        Name = "Authorization",
-        Type = SecuritySchemeType.ApiKey
+        Description="Please insert token",
+        Name="Authorization",
+        Type=SecuritySchemeType.Http,
+        BearerFormat="JWT",
+        Scheme="bearer"
+
+
     });
-    options.OperationFilter<SecurityRequirementsOperationFilter>();
+    c.AddSecurityRequirement(new OpenApiSecurityRequirement
+    {
+
+
+    {
+        new OpenApiSecurityScheme
+        {
+            Reference=new OpenApiReference
+            {
+                Type=ReferenceType.SecurityScheme,
+                Id="Bearer"
+            }
+        },
+        new string[]{}
+        }
+    });
+    //options.AddSecurityDefinition("ouath2", new OpenApiSecurityScheme
+    //{
+    //    Description = "Standard Authorization header using the bearer schema(\"bearer {token}\")",
+    //    In = ParameterLocation.Header,
+    //    Name = "Authorization",
+    //    Type = SecuritySchemeType.ApiKey
+    //});
+    //options.OperationFilter<SecurityRequirementsOperationFilter>();
 });
 builder.Services.AddAuthorization(options =>
 {
@@ -82,9 +111,15 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    app.UseDeveloperExceptionPage();    
     app.UseSwagger();
-    app.UseSwaggerUI();
+    app.UseSwaggerUI(c=> c.SwaggerEndpoint("/swagger/v1/swagger.json","dotnetClaimAuthorization v1"));
 }
+app.UseSwagger();
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API");
+});
 
 app.UseHttpsRedirection();
 
